@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: LimitForge
+type: software
+authors:
+  - family-names: Vithlani
+    given-names: Jyotier
+version: 0.1.0
+date-released: 2026-07-23
+url: https://github.com/Jyotier2006/limitforge
+license: MIT
+message: "If LimitForge supports your research or benchmark, cite this software."

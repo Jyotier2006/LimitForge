@@ -1,0 +1,116 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "limitforge"
+version = "0.1.0"
+description = "Pluggable, concurrency-safe rate limiting for Python and Django"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  { name = "Jyotier Vithlani" },
+]
+keywords = [
+  "rate-limiter",
+  "django",
+  "redis",
+  "token-bucket",
+  "sliding-window",
+  "fixed-window",
+  "middleware",
+  "distributed-systems",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Framework :: Django",
+  "Framework :: Django :: 4.2",
+  "Framework :: Django :: 5.0",
+  "Framework :: Django :: 5.1",
+  "Framework :: Django :: 5.2",
+  "Framework :: Django :: 6.0",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+redis = ["redis>=5.0,<8"]
+django = ["Django>=4.2,<6.1"]
+all = ["redis>=5.0,<8", "Django>=4.2,<6.1"]
+dev = [
+  "build>=1.2",
+  "coverage[toml]>=7.6",
+  "Django>=4.2,<6.1",
+  "mypy>=1.11",
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+  "redis>=5.0,<8",
+  "ruff>=0.8",
+  "twine>=5.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/Jyotier2006/limitforge"
+Documentation = "https://github.com/Jyotier2006/limitforge#readme"
+Repository = "https://github.com/Jyotier2006/limitforge"
+Issues = "https://github.com/Jyotier2006/limitforge/issues"
+Changelog = "https://github.com/Jyotier2006/limitforge/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"limitforge" = ["py.typed", "backends/lua/*.lua"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers --strict-config"
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = [
+  "integration: tests that require an external service",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["limitforge"]
+omit = ["src/limitforge/django/*"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 90
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+files = ["src/limitforge"]
+exclude = ["src/limitforge/django/"]
+disallow_untyped_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_return_any = true
+warn_unused_ignores = true
+ignore_missing_imports = true
