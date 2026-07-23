@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "Python": "3.13.5",
+    "Platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+    "Processor": "not reported",
+    "Revision": "local working tree",
+    "Keyspace": "1,000"
+  },
+  "results": [
+    {
+      "backend": "in-memory",
+      "algorithm": "fixed_window",
+      "operations": 50000,
+      "workers": 16,
+      "keyspace": 1000,
+      "elapsed_seconds": 0.7091748409998218,
+      "ops_per_second": 70504.47521447334,
+      "p50_us": 3.495,
+      "p95_us": 4.146,
+      "p99_us": 6.72,
+      "allowed": 50000
+    },
+    {
+      "backend": "in-memory",
+      "algorithm": "sliding_window",
+      "operations": 50000,
+      "workers": 16,
+      "keyspace": 1000,
+      "elapsed_seconds": 0.6885243880001326,
+      "ops_per_second": 72619.06894137549,
+      "p50_us": 3.796,
+      "p95_us": 4.627,
+      "p99_us": 12.999,
+      "allowed": 50000
+    },
+    {
+      "backend": "in-memory",
+      "algorithm": "token_bucket",
+      "operations": 50000,
+      "workers": 16,
+      "keyspace": 1000,
+      "elapsed_seconds": 0.7501565729999129,
+      "ops_per_second": 66652.75197156181,
+      "p50_us": 3.766,
+      "p95_us": 5.419,
+      "p99_us": 12.999,
+      "allowed": 50000
+    }
+  ]
+}
