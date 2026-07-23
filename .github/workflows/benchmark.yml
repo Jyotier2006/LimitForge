@@ -1,0 +1,50 @@
+name: Benchmark
+
+on:
+  workflow_dispatch:
+    inputs:
+      operations:
+        description: Operations per algorithm
+        default: "100000"
+        required: true
+      workers:
+        description: Worker threads
+        default: "1"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:7.4-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 2s
+          --health-timeout 2s
+          --health-retries 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python -m pip install -e ".[redis]"
+      - name: Run benchmark
+        run: |
+          python scripts/benchmark.py \
+            --operations "${{ inputs.operations }}" \
+            --workers "${{ inputs.workers }}" \
+            --redis-url redis://localhost:6379/0 \
+            --output benchmark-results.md \
+            --json-output benchmark-results.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: limitforge-benchmark
+          path: |
+            benchmark-results.md
+            benchmark-results.json

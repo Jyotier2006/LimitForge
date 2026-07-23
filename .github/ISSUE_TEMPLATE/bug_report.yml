@@ -1,0 +1,44 @@
+name: Bug report
+description: Report incorrect limiting, concurrency behavior, or integration failure
+title: "bug: "
+labels: [bug]
+body:
+  - type: dropdown
+    id: backend
+    attributes:
+      label: Backend
+      options: [in-memory, Redis, Django middleware, other]
+    validations:
+      required: true
+  - type: dropdown
+    id: algorithm
+    attributes:
+      label: Algorithm
+      options: [fixed_window, sliding_window, token_bucket, not applicable]
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      render: python
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Python, LimitForge, Redis, and Django versions
+    validations:
+      required: true

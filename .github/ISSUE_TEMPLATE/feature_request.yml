@@ -1,0 +1,23 @@
+name: Feature request
+description: Propose an algorithm, backend, integration, or observability feature
+title: "feat: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Proposed public behavior
+    validations:
+      required: true
+  - type: textarea
+    id: atomicity
+    attributes:
+      label: Atomicity and failure considerations
+    validations:
+      required: true
